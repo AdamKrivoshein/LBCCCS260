@@ -12,14 +12,18 @@ In addition to this there will be an int nMarbles variable to keep track of the 
 In combination with int maxMarbles variable, these will ensure that the bag is not overfilled.
 
 ## 2. Adding Marbles
-The function addMarble() will handle all aspects of adding marbles.
+addPhase() will ask the user:
+1. If they would like to add a marble
+2. How many marbles
+3. Which color
 
-!-- WHAT IF THEY WANT TO ADD MORE THAN ONE, AND DIFFERENT COLORS, OR RANDOM?
-
-It will first ask if you user would like to add a marble, and if not it returns.
-Then it will ask which color, and will increment the associated marble color variable, red, green, or blue.
+addMarbles() will take in an int for how many marbles, and a character to symbolize which color, or random color to add.
+The associated color will be incremented by the amount specified.
 
 ## 3. Removing Marbles
-The function removeMarble() will handle all aspects of removing marbles.
+removePhase() will ask the user how many marbles they would like to remove.
+
+removeMarbles() will take in an int for how many marbles to remove, and will randomly remove that many marbles.
 
 ## 4. Verification Functions
+displayBag() will print the contents of the bag, broken down into total and individual colors
