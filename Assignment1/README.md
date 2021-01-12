@@ -5,7 +5,6 @@ Designing a bag of marbles as simply as possible.
 Integer variables **marbles** will represent the number of marbles in the bag.
 Integer variable **maxMarbles** will set the maximum amount of marbles the bag can hold.
 
-
 ## 2. Adding Marbles
 **addMarbles()** will ask the user how many marbles they'd like to add.
 Then adds the marbles is there is room.
