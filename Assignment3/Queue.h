@@ -1,5 +1,8 @@
 #include "node.h"
 
+using std::cout;
+using std::endl;
+
 template <class T>
 class Queue {
 
@@ -11,42 +14,34 @@ class Queue {
     public:
         Queue() {
             front = NULL;
+            back = NULL;
         }
 
         void enqueue(T newVal) {
-            node<T>* oldFront = front;
-            front = new node<T>;
-            front.value = newVal;
-            if (oldFront != NULL)
-                front.next = oldFront;
-            else
-                front.next = NULL;
-            
-            front = &newNode;
-            //Basic working code:
-            /*
-            node<T> newNode;
-            newNode.value = newVal;
-            front = &newNode;
-            */
+            if (back != NULL) {
+                node<T>* oldBack = back;
+                back = new node<T>;
+                back->val = newVal;
+                back->next = NULL;
+                oldBack->next = back;
+                std::cout << back->val << std::endl;
+            } else {
+                back = new node<T>;
+                front = back;
+                back->val = newVal;
+                std::cout << front->val << std::endl;
+            }
         }
 
         void displayQueue() {
-            std::cout << front->value << std::endl;
-            std::cout << front->next << std::endl;
-            /*if (front != NULL) {
-                node<T>* current = front;
-                while (current->next != NULL) {
-                    std::cout << "Yes" << std::endl;
-                    std::cout << current->value << std::endl;
-                    current = current->next;
-                }
-            }*/
-            //Basic working code:
-            /*
             if (front != NULL) {
-                std::cout << front->value << std::endl;
+                cout << "Printing queue..." << endl;
+                node<T>* current = front;
+                cout << current->val << endl;
+                while (current->next != NULL) {
+                    current = current->next;
+                    cout << current->val << endl;
+                }
             }
-            */
         }
 };

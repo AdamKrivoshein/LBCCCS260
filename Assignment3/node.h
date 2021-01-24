@@ -1,5 +1,5 @@
 template <typename T>
 struct node {
-    T value;
+    T val;
     node* next;
 };
