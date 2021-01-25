@@ -16,6 +16,7 @@ class Queue {
             back = NULL;
         }
 
+        //O(1)
         void enqueue(T newVal) {
             if (back != NULL) {
                 node<T>* oldBack = back;
@@ -27,21 +28,27 @@ class Queue {
                 back = new node<T>;
                 front = back;
                 back->val = newVal;
+                back->next = NULL;
             }
         }
 
+        //O(1)
         T dequeue() {
             T returnVal = -1;
             if (front != NULL) {
                 returnVal = front->val;
-                if (front->next != NULL)
+                if (front->next != NULL) {
                     front = front->next;
-                else
-                    front = NULL;                
+                } else {
+                    front = NULL;
+                    back = NULL;
+                }
             }
             return returnVal;
         }
 
+        //O(n)
+        //Only for verification purposes
         void displayQueue() {
             if (front != NULL) {
                 cout << "Printing queue..." << endl;
