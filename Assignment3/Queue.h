@@ -7,7 +7,6 @@ template <class T>
 class Queue {
 
     private:
-        //variables
         node<T>* front;
         node<T>* back;
 
@@ -24,13 +23,23 @@ class Queue {
                 back->val = newVal;
                 back->next = NULL;
                 oldBack->next = back;
-                std::cout << back->val << std::endl;
             } else {
                 back = new node<T>;
                 front = back;
                 back->val = newVal;
-                std::cout << front->val << std::endl;
             }
+        }
+
+        T dequeue() {
+            T returnVal = -1;
+            if (front != NULL) {
+                returnVal = front->val;
+                if (front->next != NULL)
+                    front = front->next;
+                else
+                    front = NULL;                
+            }
+            return returnVal;
         }
 
         void displayQueue() {

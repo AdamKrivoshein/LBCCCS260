@@ -8,13 +8,26 @@ using std::endl;
 int main() {
     Queue<int> myQueue;
 
-    myQueue.displayQueue();
-    myQueue.enqueue(1);
-    myQueue.enqueue(2);
-    myQueue.enqueue(3);
-    myQueue.enqueue(4);
-    myQueue.enqueue(5);
-    myQueue.displayQueue();
+    char keepRunning = 'y';
+    int input;
+    char decision;
+
+    while (keepRunning == 'y') {
+        cout << "Would you like to add to the queue (y / n): ";
+        cin >> decision;
+        if (decision == 'y') {
+            cout << "What value would you like to add to the queue: ";
+            cin >> input;
+            if (input != 'n')
+                myQueue.enqueue(input);
+        }
+        cout << "Would you like to remove from the queue (y / n): ";
+        cin >> decision;
+        if (decision == 'y')
+            cout << myQueue.dequeue() << endl;
+        cout << "Would you like to continue (y / n): ";
+        cin >> keepRunning;
+    }
 
     return 0;
 }
