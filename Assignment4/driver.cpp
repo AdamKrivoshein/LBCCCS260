@@ -11,7 +11,9 @@ int main() {
     myList.add(1, 0);
     myList.add(2, 0);
     myList.add(3, 2);
+    myList.add(4, 1);
     cout << myList.remove(0) << endl;
+    myList.displayList();
 
     return 0;
 }

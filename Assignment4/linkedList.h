@@ -15,7 +15,7 @@ class linkedList {
             front = NULL;
         }
 
-        void add(int val, int index) {
+        void add(T val, int index) {
             if (front == NULL && index == 0) {
                 front = new node<T>;
                 front->val = val;
@@ -36,13 +36,13 @@ class linkedList {
                         return;
                 }
                 if (currentNode->next != NULL) {
-                    node<T>* newNode;
+                    node<T>* newNode = new node<T>;
                     newNode->val = val;
                     newNode->next = currentNode->next;
                     currentNode->next = newNode;
                 }
                 else {
-                    node<T>* newNode;
+                    node<T>* newNode = new node<T>;
                     newNode->val = val;
                     newNode->next = NULL;
                     currentNode->next = newNode;
@@ -51,6 +51,28 @@ class linkedList {
         }
 
         int remove(int index) {
+            if (front != NULL) {
+                node<T>* currentNode = front;
+                if (index == 0) {
+                    if (currentNode->next != NULL)
+                        front = currentNode->next;
+                    int val = currentNode->val;
+                    delete[] currentNode;
+                    return val;
+                }
+            }
+
             return front->val;
+        }
+
+        void displayList() {
+            node<T>* currentNode = front;
+            if (currentNode != NULL) {
+                cout << currentNode->val << endl;
+                while (currentNode->next != NULL) {
+                    currentNode = currentNode->next;
+                    cout << currentNode->val << endl;
+                }
+            }
         }
 };
