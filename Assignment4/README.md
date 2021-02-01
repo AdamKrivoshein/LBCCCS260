@@ -11,7 +11,16 @@ and the idea of also having a pointer to the end of the linked list to halve loo
 
 ## linkedList.h
 ### add()
-tbd
+**Inputs:** value, position
+
+**nextNode** = **front's** node.
+
+For each **position**:
+
+    **nextNode** = **nextNode's** **next** node.
+
+ERROR: This design doesn't really work. If user picks end of list, then it goes into NULL, or if prevented, nextNode doesn't point to the next node.
+
 ### remove()
 tbd
 ### get()
