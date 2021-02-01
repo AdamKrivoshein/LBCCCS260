@@ -99,6 +99,7 @@ class linkedList {
             return bad;
         }
 
+        //Strictly for testing purposes only
         void displayList() {
             node<T>* currentNode = front;
             if (currentNode != NULL) {
