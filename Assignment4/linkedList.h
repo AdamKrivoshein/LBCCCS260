@@ -18,13 +18,7 @@ class linkedList {
         //O(n)
         void add(T val, int index) {
             //If statement so doesn't contribute to big O complexity.
-            if (front == NULL && index == 0) {
-                front = new node<T>;
-                front->val = val;
-                front->next = NULL;
-            }
-            //If statement so doesn't contribute to big O complexity.
-            else if (index == 0 && front != NULL) {
+            if (index == 0) {
                 node<T>* oldFront = front;
                 front = new node<T>;
                 front->val = val;
@@ -34,25 +28,18 @@ class linkedList {
             else if (front != NULL) {
                 node<T>* currentNode = front;
                 //For loop is O(n)
+                //Iterating to node before index
                 for (int i = 1; i < index; i++) {
                     if (currentNode->next != NULL)
                         currentNode = currentNode->next;
                     else
                         return;
                 }
-                //If statement so doesn't contribute to big O complexity.
-                if (currentNode->next != NULL) {
-                    node<T>* newNode = new node<T>;
-                    newNode->val = val;
-                    newNode->next = currentNode->next;
-                    currentNode->next = newNode;
-                }
-                else {
-                    node<T>* newNode = new node<T>;
-                    newNode->val = val;
-                    newNode->next = NULL;
-                    currentNode->next = newNode;
-                }
+                //Creating and placing the new node
+                node<T>* newNode = new node<T>;
+                newNode->val = val;
+                newNode->next = currentNode->next;
+                currentNode->next = newNode;
             }
         }
 
