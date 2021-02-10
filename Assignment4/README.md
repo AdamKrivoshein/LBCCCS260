@@ -1,30 +1,46 @@
 # Assignment 4: Arbitrary List Operations
-I've elected to go for a linked list over an array, as practice with pointers is always good,
-and the idea of also having a pointer to the end of the linked list to halve lookup times is intriguing to me if I get to it.
+I've elected to go for a linked list over an array, as practice with pointers is always good and I'll need these concepts for future data structures.
 
 ## node.h
 **val:** Stores the value at each node.
 
 **next:** Pointer to the next node.
 
-**prev:** Pointer to the previous node.
-
 ## linkedList.h
 ### add()
 **Inputs:** value, position
 
-**nextNode** = **front's** node.
+If front is null:
 
-For each **position**:
+Add new node at front, pointing to null
 
-    **nextNode** = **nextNode's** **next** node.
+if index is 0:
 
-ERROR: This design doesn't really work. If user picks end of list, then it goes into NULL, or if prevented, nextNode doesn't point to the next node.
+Add node at front, pointing to the next node
+
+Otherwise iterate through the list until before the desired index, and store that for the next step.
+
+Create a new node, and point the current node towards it, and set the new node's pointer to the next node.
 
 ### remove()
-tbd
+**Inputs:** index
+
+Assuming front isn't empty:
+
+if index is 0:
+
+Store the value at front, make front point to the next node, delete old front, and return the value.
+
+Iterate through the list until the node before the one to be removed.
+
+If the next node isn't null:
+
+Store the next node and it's value, set the current node's next to the next node's next, delete the next node, and return the value.
+
 ### get()
-tbd
+**Inputs:** index
+
+Iterate through the list until the desired index, then return the value of that node.
 
 ## driver.cpp
-Basic user input loop to allow adding, removing, and getting from the linked list.
+Sequence of function calls to test the data structure.

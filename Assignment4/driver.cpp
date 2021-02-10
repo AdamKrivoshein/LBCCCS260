@@ -14,7 +14,7 @@ int main() {
     cout << "Get function test:" << endl;
     cout << myList.get(0) << endl;
     cout << myList.get(1) << endl;
-    cout << myList.get(2) << endl;
+    cout << myList.get(2) << endl; 
     cout << myList.get(3) << endl;
     cout << myList.get(4) << endl;
     cout << "Remove and get function test:" << endl;
