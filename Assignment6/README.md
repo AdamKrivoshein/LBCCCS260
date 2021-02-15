@@ -21,7 +21,9 @@
 
 **traverse()**
 *Assuming root (or recursive node) & val are passed to this traversal*
+
 *Returns the node with a matching value (for removal), or if there's no match, the appropriate node it would added under*
+
     if currentNode DNE:
         return currentNode
     elif val <= currentNode:
