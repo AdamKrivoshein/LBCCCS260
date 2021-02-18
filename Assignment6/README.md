@@ -3,8 +3,8 @@
 ## Design Requirements
 |#|Requirement|Test|
 |-|-----------|----|
-|1|**add():** Node insertions should autosort, with left nodes being smaller, and right nodes larger|A display tree function will let us verify the insertion is in it's appropriate spot|
-|2|**remove():** TBD|TBD|
+|1|**add():** Node insertions should autosort, with left nodes being smaller, and right nodes larger.|A display tree function will let us verify the insertion is in it's appropriate spot.|
+|2|**remove():** Node removals should link child nodes to parent node if present.|A display tree function will let us verify the correct removal and linking of child nodes.|
 
 ## node.h
 **val:** Stores the data
@@ -14,25 +14,34 @@
 **right:** Stores the data
 
 ## binarySearchTree.h
-**add():**
+**add():** REWRITE: Traverse without the help of an outside function.
 
 *Inputs: val (The value to be added).*
 
 *Outputs: None.*
 
-    node = call traverse, passing root, val
+    node = call findNode, passing root, val
     if node DNE:
         node = new node with val
     else if val <= node:
-        node's left = new node with val
+        node's left child = new node with val
     else:
-        node's right node = new node with val
+        node's right child = new node with val
 
-**remove():**
+**remove():** REWRITE: Traverse without the help of an outside function/
 
+*Inputs: val (The value to be removed).*
 
+*Outputs: None.*
 
-**traverse(node, val):**
+    node = call findNode, passing root, val
+    if node = val:
+        if node's left child exists:
+            node = node's left child
+        else if node's right child exists:
+            node = node's right child
+
+**findNode(node, val):** REWRITE: Just implement this as a find and display node function, or display tree function.
 
 *Inputs: root (or recursive node), val (That you would like to find).*
 
