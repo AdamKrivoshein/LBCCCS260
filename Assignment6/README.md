@@ -14,21 +14,27 @@
 **right:** Stores the data
 
 ## binarySearchTree.h
-**add():** REWRITE: Traverse without the help of an outside function.
+**add():**
 
-*Inputs: val (The value to be added).*
+*Inputs: root (of the tree), val (The value to be added).*
 
 *Outputs: None.*
 
-    node = call findNode, passing root, val
-    if node DNE:
-        node = new node with val
-    else if val <= node:
-        node's left child = new node with val
+    if currentNode DNE:
+        currentNode = new node with val
+    else if val <= currentNode:
+        if leftNode exists:
+            recurse with leftNode, val
+        else:
+            add leftNode with val
     else:
-        node's right child = new node with val
+        if rightNode exists:
+            recurse with rightNode, val
+        else:
+            add rightNode with val
+    return
 
-**remove():** REWRITE: Traverse without the help of an outside function/
+**remove():** REWRITE: Traverse without the help of an outside function
 
 *Inputs: val (The value to be removed).*
 
