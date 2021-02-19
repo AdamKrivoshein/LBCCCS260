@@ -34,37 +34,57 @@
             add rightNode with val
     return
 
-**remove():** REWRITE: Traverse without the help of an outside function
+**remove():**
 
-*Inputs: val (The value to be removed).*
+*Inputs: root (or recursive node), val (The value to be removed).*
 
 *Outputs: None.*
 
-    node = call findNode, passing root, val
-    if node = val:
-        if node's left child exists:
-            node = node's left child
-        else if node's right child exists:
-            node = node's right child
+    removeNode = call findNode() with root, val
 
-**findNode(node, val):** REWRITE: Just implement this as a find and display node function, or display tree function.
+    if removeNode exists:
+        
+    return
 
-*Inputs: root (or recursive node), val (That you would like to find).*
+**findNode():**
 
-*Outputs: the node with a matching value (for removal), or if there's no match, the appropriate node it would added under.*
+*Inputs: root (or recursive node), val (The value to find).*
 
-    if currentNode DNE:
-        return currentNode
-    else if val <= currentNode:
+*Outputs: node*
+
+    if currentNode exists:
+        if val < currentNode's val:
+            //NOTE: This needs to store the value of the recursion so it can be further returned.
+            recurse with leftNode
+        else if val > currentNode's val:
+            recurse with rightNode
+        else:
+            return currentNode
+    return null node
+
+**findSmallest():**
+
+*Inputs: node*
+
+*Outputs: node*
+
+    if leftNode exists:
+        recurse with leftNode
+    return 
+
+**inOrder(node, val):**
+
+*Inputs: root (or recursive node).*
+
+*Outputs: none.*
+
+    if currentNode exists:
+        print currentNode val
         if leftNode exists:
-            recurse with leftNode, val
-        else:
-            return currentNode
-    else:
-        if rightNode exists:
-            recurse with rightNode, val
-        else:
-            return currentNode
+            recurse with leftNode
+        else if rightNode exists:
+            recurse with rightNode
+    return
 
 ## driver.cpp
 Initializes and runs the binary search tree.
