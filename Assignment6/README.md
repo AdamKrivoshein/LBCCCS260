@@ -43,6 +43,9 @@
     removeNode = call findNode() with root, val
 
     if removeNode exists:
+        replacementNode = call findSmallest with removeNode
+        removeNode's val = replacementNode's val
+        free replacementNode
         
     return
 
@@ -54,23 +57,23 @@
 
     if currentNode exists:
         if val < currentNode's val:
-            //NOTE: This needs to store the value of the recursion so it can be further returned.
-            recurse with leftNode
+            return recurse with leftNode
         else if val > currentNode's val:
-            recurse with rightNode
+            return recurse with rightNode
         else:
             return currentNode
     return null node
 
 **findSmallest():**
 
-*Inputs: node*
+*Inputs: node (The right node of a node to be removed)*
 
 *Outputs: node*
 
     if leftNode exists:
-        recurse with leftNode
-    return 
+        return recurse with leftNode
+    else:
+        return currentNode
 
 **inOrder(node, val):**
 
