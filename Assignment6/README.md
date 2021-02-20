@@ -75,6 +75,13 @@
     else:
         return currentNode
 
+    if leftNode's leftNode exists:
+        return recurse with leftNode
+    else:
+        tempNode = leftNode's leftNode
+        leftNode's left = null
+        return tempNode
+
 **inOrder(node, val):**
 
 *Inputs: root (or recursive node).*
