@@ -16,13 +16,22 @@
 ## binarySearchTree.h
 **add():**
 
-*Inputs: root (of the tree), val (The value to be added).*
+*Inputs: val (The value to be added).*
 
 *Outputs: None.*
 
-    if currentNode DNE:
-        currentNode = new node with val
-    else if val <= currentNode:
+    if root = NULL:
+        root = new node with val
+    else:
+        call addRecurse() with root, val
+
+**addRecurse():**
+
+*Inputs: node, val (The value to be added).*
+
+*Outputs: None.*
+
+    if val <= currentNode:
         if leftNode exists:
             recurse with leftNode, val
         else:
@@ -36,7 +45,7 @@
 
 **remove():**
 
-*Inputs: root (or recursive node), val (The value to be removed).*
+*Inputs: val (The value to be removed).*
 
 *Outputs: None.*
 
@@ -82,11 +91,19 @@
         leftNode's left = null
         return tempNode
 
-**inOrder(node, val):**
+**printTree():**
+
+*Inputs: None.*
+
+*Outputs: None (prints tree).*
+
+    calls inOrder() with root
+
+**inOrder():**
 
 *Inputs: root (or recursive node).*
 
-*Outputs: none.*
+*Outputs: None.*
 
     if currentNode exists:
         print currentNode val
