@@ -51,6 +51,7 @@
 
     removeNode = call findNode() with root, val
 
+    //TODO: Inspect this section, account for right node not existing, aka if it doesn't, findLargest() on left branch.
     if removeNode exists:
         replacementNode = call findSmallest with removeNode
         removeNode's val = replacementNode's val
@@ -109,7 +110,7 @@
         print currentNode val
         if leftNode exists:
             recurse with leftNode
-        else if rightNode exists:
+        if rightNode exists:
             recurse with rightNode
     return
 

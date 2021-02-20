@@ -1,6 +1,12 @@
 template <typename T>
-struct node {
+struct Node {
     T val;
-    node* left;
-    node* right;
+    Node* left;
+    Node* right;
+
+    Node(T val, Node* left, Node* right) {
+        this->val = val;
+        this->left = left;
+        this->right = right;
+    }
 };
