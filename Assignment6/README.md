@@ -5,6 +5,7 @@
 |-|-----------|----|
 |1|**add():** Node insertions should autosort, with left nodes being smaller, and right nodes larger.|A display tree function will let us verify the insertion is in it's appropriate spot.|
 |2|**remove():** Node removals should link child nodes to parent node if present.|A display tree function will let us verify the correct removal and linking of child nodes.|
+|3|**printTree():** Nodes should be printed from least to greatest in pre-order.|This function's printing of the tree will verify that it's working.|
 
 ## node.h
 **val:** Stores the data
