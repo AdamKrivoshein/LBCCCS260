@@ -71,15 +71,36 @@
                 nodeParent's right pointer = null
             free removeNode
             return
+    else:
+        removeNode = root
+        if removeNode's left and right dne:
+            free removeNode
+            root = null
+            return
 
-        //Removal Case: Node has children. Reorganizing is needed
-        if removeNode's rightNode exists:
-            replacementNode = call findSmallest with removeNode's rightNode
-        else if removeNode's leftNode exists:
+    //Removal Case: Node has children. Reorganizing is needed
+    if removeNode's leftNode exists:
+        if removeNode's leftNode's rightNode exists:
             replacementNode = call findLargest with removeNode's leftNode
-            
-        removeNode's val = replacementNode's val
-        free replacementNode
+        else:
+            replacementNode = removeNode's leftNode
+            if removeNode's leftNode's leftNode exists:
+                removeNode's left pointer = removeNode's leftNode's leftNode
+            else:
+                removeNode's left pointer = null
+
+    else if removeNode's rightNode exists:
+        if removeNode's rightNode's leftNode exists:
+            replacementNode = call findSmallest with removeNode's rightNode
+        else:
+            replacementNode = removeNode's rightNode
+            if removeNode's rightNode's rightNode exists:
+                removeNode's right pointer = removeNode's rightNode's rightNode
+            else:
+                removeNode's right pointer = null
+        
+    removeNode's val = replacementNode's val
+    free replacementNode
         
     return
 
@@ -115,31 +136,41 @@
             return currentNode
     return null node
 
-**findSmallest():**
-
-*Inputs: node (The right node of a node to be removed)*
-
-*Outputs: node*
-
-    if leftNode's leftNode exists:
-        return recurse with leftNode
-    else:
-        tempNode = leftNode
-        pointer to leftNode = null
-        return tempNode
-
 **findLargest():**
 
-*Inputs: node (The left node of a node to be removed)*
+*Inputs: node (The left node of a node to be removed, ONLY if the node passed has a child to the right)*
 
 *Outputs: node*
 
-    if rightNode's rightNode exists:
-        return recurse with rightNode
-    else:
-        tempNode = rightNode
-        pointer to rightNode = null
-        return tempNode
+    if rightNode exists:
+        if rightNode's rightNode exists:
+            return recurse with rightNode
+        else:
+            tempNode = rightNode
+            if currentNode's right node's left node exists:
+                currentNode's right = currentNode's right node's left;
+            else:
+                currentNode's right = null
+            return tempNode
+    return null
+
+**findSmallest():**
+
+*Inputs: node (The right node of a node to be removed, ONLY if the node passed has a child to the right)*
+
+*Outputs: node*
+
+    if leftNode exists:
+        if leftNode's leftNode exists:
+            return recurse with leftNode
+        else:
+            tempNode = leftNode
+            if currentNode's left node's right node exists:
+                currentNode's left = currentNode's left node's right;
+            else:
+                currentNode's left = null
+            return tempNode
+    return null
 
 **printTree():**
 
