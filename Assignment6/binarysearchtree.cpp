@@ -10,6 +10,13 @@ class BinarySearchTree {
         Node<int>* root = nullptr;
 
     public:
+        /*
+        -- Add Complexity Analysis --
+        Unsorted Binary Tree: O(1) If you can continue to place the new value wherever you want, unsorted, like at the top of the tree.
+        Sorted Binary Tree: O(n) Worst case because my tree is not autobalanced, so it could just be one long list to the left or right.
+                            O(logn) If we assume the tree is balanced, as every left/right node decision we make halves the remaining nodes that the new node might be added to.
+        */
+
         //Function: Adds a node to the tree with the value specified.
         //Inputs: int (value to be inserted)
         //Outputs: None
@@ -37,6 +44,13 @@ class BinarySearchTree {
                     node->right = new Node<int>(val, nullptr, nullptr);
             return;
         }
+
+        /*
+        -- Search Complexity Analysis --
+        Unsorted Binary Tree: O(n) Because you could have to search the entire tree before finding the desired node.
+        Sorted Binary Tree: O(n) Worst case because my tree is not autobalanced, so it could just be one long list to the left or right to find the smallest or largest node.
+                            O(logn) If we assume the tree is balanced, as every left/right node decision we make halves the remaining nodes that the desired node could be in.
+        */
 
         //Function: Begins the process of removing a node.
         //Inputs: int (value to be removed)
