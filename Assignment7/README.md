@@ -9,29 +9,42 @@
 |3|**printTable():** Should display every index and value pairing.|Knowing what to expect from previous insert() operations will verify this.|
 
 ## hashTable.h
+**table:** Array of strings
+
+**size:** Size of the array (Number of different hashed keys that can exist)
+
 **insert():**
 
-*Inputs: *
+*Inputs: string*
 
-*Outputs: *
+*Outputs: None.*
 
-    TBD
+    index = call hash() with string key
+    array at index = key (doubles as the value)
 
 **hash():**
 
-*Inputs: *
+*Inputs: string*
 
-*Outputs: *
+*Outputs: int (index of array)*
 
-    TBD
+    sum = 0
+    for each character in key:
+        asciiTemp = key character converted to ascii
+        sum = sum + asciiTemp
+    sum = sum % size of table array
+    return sum
 
 **contains():**
 
-*Inputs: *
+*Inputs: string*
 
-*Outputs: *
+*Outputs: bool (true if the value exists in the hash table)*
 
-    TBD
+    index = call hash() with string key
+    if array at index = key (doubles as value):
+        return true
+    return false
 
 **printTable():**
 
@@ -39,7 +52,8 @@
 
 *Outputs: *
 
-    TBD
+    for each index in array:
+        print contents
 
 ## driver.cpp
 Initializes and runs the hash table
