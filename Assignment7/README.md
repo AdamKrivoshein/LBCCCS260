@@ -30,8 +30,7 @@
 
     sum = 0
     for each character in key:
-        asciiTemp = key character converted to ascii
-        sum = sum + asciiTemp
+        sum = sum + key in ascii
     sum = sum % size of table array
     return sum
 

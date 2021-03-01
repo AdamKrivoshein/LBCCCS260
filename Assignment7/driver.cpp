@@ -8,7 +8,7 @@ using std::endl;
 int main() {
     hashTable table;
 
-    table.hash("Test.");
+    table.insert("+");
 
     return 0;
 }

@@ -7,19 +7,32 @@ using std::endl;
 using std::string;
 
 class hashTable {
-    void insert() {
+    private:
+        int arraySize = 20;
+        string tableArray[20];
 
-    }
+    public:
 
-    void hash(string val) {
-        //Test how iterating strings work
-    }
+        void insert(string val) {
+            int i = hash(val);
+            tableArray[i] = val;
+        }
 
-    void contains() {
+        int hash(string val) {
+            //https://www.geeksforgeeks.org/range-based-loop-c/
+            int sum = 0;
+            for (auto c : val)
+                sum += int(c);
+            sum %= arraySize;
 
-    }
+            return sum;
+        }
 
-    void printTable() {
+        void contains() {
 
-    }
+        }
+
+        void printTable() {
+
+        }
 };
