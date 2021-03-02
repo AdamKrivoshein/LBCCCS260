@@ -52,7 +52,8 @@
 *Outputs: *
 
     for each index in array:
-        print contents
+        if index contains contents:
+            print contents
 
 ## driver.cpp
 Initializes and runs the hash table
