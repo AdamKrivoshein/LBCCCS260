@@ -1,12 +1,12 @@
 # Assignment 7: Hash Table
 
-[Design Requirements](#Design-Requirements)
+[Design Requirements](#design-requirements)
 
-[Hashtable.h Design](#hashTable-h)
+[Hashtable.h Design](#hashTableh)
 
-[Driver.cpp Design](#driver-cpp)
+[Driver.cpp Design](#drivercpp)
 
-[Collisions and Their Effect on Complexity](#Collisions-and-their-effect-on-complexity)
+[Collisions and Their Effect on Complexity](#collisions-and-their-effect-on-complexity)
 
 ## Design Requirements
 |#|Requirement|Test|
