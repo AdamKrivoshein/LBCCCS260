@@ -1,5 +1,10 @@
 # Assignment 7: Hash Table
 
+[link](#Design-Requirements)
+[link](#hashTable.h)
+[link](#driver.cpp)
+[link](#Collisions-and-their-effect-on-complexity)
+
 ## Design Requirements
 |#|Requirement|Test|
 |-|-----------|----|
@@ -9,6 +14,8 @@
 |3|**printTable():** Should display every index and value pairing.|Knowing what to expect from previous insert() operations will verify this.|
 
 ## hashTable.h
+**linkedList.h and node.h are used from Assignment 4 as a solution to the collision problem.**
+
 **table:** Array of strings
 
 **size:** Size of the array (Number of different hashed keys that can exist)
@@ -20,7 +27,7 @@
 *Outputs: None.*
 
     index = call hash() with string key
-    array at index = key (doubles as the value)
+    add to list at index
 
 **hash():**
 
@@ -41,9 +48,7 @@
 *Outputs: bool (true if the value exists in the hash table)*
 
     index = call hash() with string key
-    if array at index = key (doubles as value):
-        return true
-    return false
+    return call contains() at index
 
 **printTable():**
 
@@ -52,8 +57,14 @@
 *Outputs: *
 
     for each index in array:
-        if index contains contents:
-            print contents
+        call displayList() at index
 
 ## driver.cpp
 Initializes and runs the hash table
+
+## Collisions and their effect on complexity
+While a perfect hash table with no collisions has an insertion and contains complexity of O(1), 
+in it's worst case collisions can cause an O(n) complexity for contains, as it's possible all values could somehow end up with the same key,
+forcing the program to iterate through the list in search of the item. Insertion would still be O(1) fortunately, as you can always just add
+on to the list at the key. Because of this you should seek a hashing function that evenly distributes any collisions so there are no drops in
+expected performance due to running into a long list of values with the same key.
