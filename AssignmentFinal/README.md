@@ -38,7 +38,7 @@ Idea: Add addVertex(vertextName, destination) as an overflow function that also 
 **shortestPath(source, destination):**
 
     Initialize shortestPaths 2 x graphSize 2d array (First index is the node id, 0 is distance which is defaulted to 2147482647, 1 is parent)
-    shortestPaths @ source, 1 (distance) = 0
+    shortestPaths @ source, 0 (distance) = 0
     Initialize nextNodes queue
     Initialize visited array (values initiailized to 0)
 

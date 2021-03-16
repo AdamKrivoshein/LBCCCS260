@@ -9,14 +9,21 @@ int main() {
 
     Graph myGraph;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 8; i++) {
         myGraph.addVertex();
     }
 
-    myGraph.addEdge(3, 1, 1);
+    //Perform a drawn graph test on this tomorrow.
+    myGraph.addEdge(0, 1, 1);
     myGraph.addEdge(1, 3, 1);
-    myGraph.addEdge(3, 8, 7);
-    myGraph.addEdge(9, 2, 3);
+    myGraph.addEdge(3, 4, 7);
+    myGraph.addEdge(3, 5, 6);
+    myGraph.addEdge(4, 7, 3);
+    myGraph.addEdge(5, 6, 9);
+    myGraph.addEdge(7, 6, 1);
+    myGraph.addEdge(7, 2, 8);
+
+    cout << "Shortest path 0 - 7: " << myGraph.shortestPath(0, 2) << endl;
 
     myGraph.displayMatrix();
 
