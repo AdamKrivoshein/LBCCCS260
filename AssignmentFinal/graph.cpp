@@ -21,7 +21,7 @@ class Graph {
                 matrix[row] = new int[matrixSize];
                 //Initializing matrix values
                 for (int col = 0; col < matrixSize; col++)
-                    matrix[row][col] = 2147482647;
+                    matrix[row][col] = INT_MAX;
             }
         }
 
@@ -47,7 +47,7 @@ class Graph {
                 newMatrix[row] = new int[matrixSize * 2];
                 //Initializing matrix values
                 for (int col = 0; col < (matrixSize * 2); col++)
-                    newMatrix[row][col] = 2147482647;
+                    newMatrix[row][col] = INT_MAX;
             }
 
             //Transfering matrix data
@@ -72,8 +72,8 @@ class Graph {
             shortestPaths = new int*[graphSize];
             for (int i = 0; i < graphSize; i++) {
                 shortestPaths[i] = new int[2];
-                shortestPaths[i][0] = 2147482647;
-                shortestPaths[i][1] = 2147482647;
+                shortestPaths[i][0] = INT_MAX;
+                shortestPaths[i][1] = INT_MAX;
             }
             shortestPaths[source][0] = 0;
 
@@ -91,9 +91,8 @@ class Graph {
                     int currentNode = nextNodes.dequeue();
                     for (int col = 0; col < graphSize; col++) {
                         //Ensuring the node is actually connected and hasn't already been visited
-                        if (matrix[currentNode][col] != 2147482647 && visitedNodes[currentNode] == 0) {
+                        if (matrix[currentNode][col] != INT_MAX && visitedNodes[currentNode] == 0) {
                             nextNodes.enqueue(col);
-                            //Need to review this downward...
                             if (shortestPaths[currentNode][0] + matrix[currentNode][col] < shortestPaths[col][0]) {
                                 shortestPaths[col][0] = shortestPaths[currentNode][0] + matrix[currentNode][col];
                                 shortestPaths[col][1] = currentNode;
@@ -103,17 +102,21 @@ class Graph {
                     visitedNodes[currentNode] = 1;
                 }
             }
-
+            //Should consider also printing out the path taken as proof.
+            //IMPORTANT: Also need to free datastructures here
             return shortestPaths[destination][0];
         }
 
-        //For debug purposes
+        //Graph minSpanTree() {
+
+        //}
+
         void displayMatrix() {
             cout << endl;
             for (int row = 0; row < matrixSize; row++) {
                 for (int col = 0; col < matrixSize; col++) {
                     //For readiblity purposes "infinity" is replaced with 0
-                    if (matrix[row][col] == 2147482647)
+                    if (matrix[row][col] == INT_MAX)
                         cout << " 0";
                     else
                         cout << " " << matrix[row][col];

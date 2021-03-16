@@ -56,7 +56,31 @@ Idea: Add addVertex(vertextName, destination) as an overflow function that also 
 
         return shortestPaths @ destination, 0
 
-**minSpanTree():**
+**minSpanTree(source):**
+
+    Initialize minGraph graph
+    Initialize cheapestEdge array (3 long, 0 being the source node, 1 being distance, 2 being the new node)
+    finished = 0
+
+    add source to minGraph
+
+    while finished = 0
+        //ISSUE: Would normally just use for row in minGraph.graphSize, but the nodes could be added out of order.
+        //       For example: minSpan tree could contain 1, 3. 1, 2 would be searched, but not 3.
+        //       Solution is probably a recursive search of the minTree.
+        for minNode in minGraph //HOW???
+            for col in graphSize
+                if matrix @ minNode, col < cheapestEdge @ 1
+                    cheapestEdge @ 0 = minNode
+                    cheapestEdge @ 1 = matrix @ minNode, col
+                    cheapestEdge @ 2 = col
+        if cheapestEdge @ 1 != infinity:
+            add cheapestEdge @ 2 to minGraph
+        else:
+            finished = 1
+        cheapestEdge @ 0 = 0
+        cheapestEdge @ 1 = infinity
+        cheapestEdge @ 2 = 0
 
 **displayMatrix():**
 
