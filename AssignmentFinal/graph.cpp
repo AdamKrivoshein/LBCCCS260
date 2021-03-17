@@ -1,69 +1,89 @@
 #include <iostream>
+#include <string>
 #include "Queue.h"
 
 using std::cout;
 using std::cin;
 using std::endl;
+using std::string;
 
 class Graph {
     private:
         //https://stackoverflow.com/questions/16001803/pointer-to-pointer-dynamic-two-dimensional-array
-        int **matrix;
+        int **edgeMatrix;
+        int *nodeList;
         int matrixSize = 4;
         int graphSize = 0;
 
     public:
         Graph() {
-            //Setting up the 2d array matrix
-            matrix = new int*[matrixSize];
+            //Setting up the 2d array edgeMatrix
+            edgeMatrix = new int*[matrixSize];
 
             for (int row = 0; row < matrixSize; row++) {
-                matrix[row] = new int[matrixSize];
-                //Initializing matrix values
+                edgeMatrix[row] = new int[matrixSize];
+                //Initializing edgeMatrix values
                 for (int col = 0; col < matrixSize; col++)
-                    matrix[row][col] = INT_MAX;
+                    edgeMatrix[row][col] = INT_MAX;
             }
+
+            //Setting up the nodeList
+            nodeList = new int[matrixSize];
         }
 
         void addVertex() {
-            if (graphSize < matrixSize)
+            if (graphSize < matrixSize) {
+                nodeList[graphSize] = graphSize;
                 graphSize++;
+            }
             else {
                 expandMatrix();
+                nodeList[graphSize] = graphSize;
                 graphSize++;
             }
         }
 
         void addEdge(int source, int destination, int length) {
             if (source < graphSize && destination < graphSize)
-                matrix[source][destination] = length;
+                edgeMatrix[source][destination] = length;
         }
 
         void expandMatrix() {
-            //Initializing new matrix
+            //Initializing new edgeMatrix
             int **newMatrix = new int*[matrixSize * 2];
 
             for (int row = 0; row < (matrixSize * 2); row++) {
                 newMatrix[row] = new int[matrixSize * 2];
-                //Initializing matrix values
+                //Initializing edgeMatrix values
                 for (int col = 0; col < (matrixSize * 2); col++)
                     newMatrix[row][col] = INT_MAX;
             }
 
-            //Transfering matrix data
+            //Transfering edgeMatrix data
             for (int row = 0; row < matrixSize; row++) {
                 for (int col = 0; col < matrixSize; col++)
-                    newMatrix[row][col] = matrix[row][col];
+                    newMatrix[row][col] = edgeMatrix[row][col];
             }
 
-            //Freeing old matrix memory
+            //Freeing old edgeMatrix memory
             for (int row = 0; row < matrixSize; row++)
-                free(matrix[row]);
-            free(matrix);
+                free(edgeMatrix[row]);
+            free(edgeMatrix);
 
             //Transfering data
-            matrix = newMatrix;
+            edgeMatrix = newMatrix;
             matrixSize = matrixSize * 2;
+
+            //Initializing new nodeList
+            int *newList = new int[matrixSize * 2];
+
+            //Transfering nodeList data
+            for (int i = 0; i < matrixSize; i++)
+                newList[i] = nodeList[i];
+
+            free(nodeList);
+
+            nodeList = newList;
         }
 
         int shortestPath(int source, int destination) {
@@ -91,10 +111,10 @@ class Graph {
                     int currentNode = nextNodes.dequeue();
                     for (int col = 0; col < graphSize; col++) {
                         //Ensuring the node is actually connected and hasn't already been visited
-                        if (matrix[currentNode][col] != INT_MAX && visitedNodes[currentNode] == 0) {
+                        if (edgeMatrix[currentNode][col] != INT_MAX && visitedNodes[currentNode] == 0) {
                             nextNodes.enqueue(col);
-                            if (shortestPaths[currentNode][0] + matrix[currentNode][col] < shortestPaths[col][0]) {
-                                shortestPaths[col][0] = shortestPaths[currentNode][0] + matrix[currentNode][col];
+                            if (shortestPaths[currentNode][0] + edgeMatrix[currentNode][col] < shortestPaths[col][0]) {
+                                shortestPaths[col][0] = shortestPaths[currentNode][0] + edgeMatrix[currentNode][col];
                                 shortestPaths[col][1] = currentNode;
                             }
                         }
@@ -104,22 +124,29 @@ class Graph {
             }
             //Should consider also printing out the path taken as proof.
             //IMPORTANT: Also need to free datastructures here
+            //Should also make sure this works when the graph is out of order
             return shortestPaths[destination][0];
         }
 
-        //Graph minSpanTree() {
+        Graph minSpanTree() {
+            Graph minGraph;
+            int cheapestEdge[3];
+            bool finished = false;
 
-        //}
+            //while (!finished) {
+            //    for ()
+            //}
+        }
 
         void displayMatrix() {
             cout << endl;
             for (int row = 0; row < matrixSize; row++) {
                 for (int col = 0; col < matrixSize; col++) {
                     //For readiblity purposes "infinity" is replaced with 0
-                    if (matrix[row][col] == INT_MAX)
+                    if (edgeMatrix[row][col] == INT_MAX)
                         cout << " 0";
                     else
-                        cout << " " << matrix[row][col];
+                        cout << " " << edgeMatrix[row][col];
                 }
                 //Line break for each row
                 cout << endl;
@@ -129,7 +156,9 @@ class Graph {
 
         void deleteGraph() {
             for (int row = 0; row < matrixSize; row++)
-                free(matrix[row]);
-            free(matrix);
+                free(edgeMatrix[row]);
+            free(edgeMatrix);
         }
+
+        //int getNodeList(int index)
 };

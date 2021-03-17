@@ -27,7 +27,5 @@ int main() {
 
     myGraph.displayMatrix();
 
-    cout << INT_MAX << endl;
-
     return 0;
 }

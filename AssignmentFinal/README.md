@@ -65,12 +65,9 @@ Idea: Add addVertex(vertextName, destination) as an overflow function that also 
     add source to minGraph
 
     while finished = 0
-        //ISSUE: Would normally just use for row in minGraph.graphSize, but the nodes could be added out of order.
-        //       For example: minSpan tree could contain 1, 3. 1, 2 would be searched, but not 3.
-        //       Solution is probably a recursive search of the minTree.
-        for minNode in minGraph //HOW???
+        for minNode in minGraph.getNodeList() //Does this work???
             for col in graphSize
-                if matrix @ minNode, col < cheapestEdge @ 1
+                if matrix @ minNode, col < cheapestEdge @ 1 and col not isInNodeList()
                     cheapestEdge @ 0 = minNode
                     cheapestEdge @ 1 = matrix @ minNode, col
                     cheapestEdge @ 2 = col
@@ -88,3 +85,18 @@ Idea: Add addVertex(vertextName, destination) as an overflow function that also 
         for MatrixSize col:
             print matrix @ row, col
         print line break
+
+**getNodeList():**
+
+    return nodeList
+
+**getMatrixEdge(row, col):**
+
+    return edgeMatrix @ row, col
+
+**isInNodeList(val):**
+
+    for index in graphSize:
+        if nodeList @ index = val:
+            return true
+    return false
