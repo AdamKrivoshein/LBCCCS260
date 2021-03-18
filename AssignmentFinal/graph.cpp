@@ -151,24 +151,28 @@ class Graph {
             minGraph.addVertex(source);
 
             while (!finished) {
-                cout << "Entering while loop..." << endl;
+                //cout << "Entering while loop..." << endl;
                 cout << "minGraph.graphSize = " << minGraph.graphSize << endl;
                 for (int i = 0; i < minGraph.graphSize; i++) {
-                    cout << "minGraph loop..." << endl;
+                    //cout << "minGraph loop..." << endl;
                     int minNode = minGraph.nodeList[i];
                     for (int col = 0; col < graphSize; col++) {
-                        cout << "matrix loop... @ edgeMatrix[" << minNode << "][" << col << "]" << endl;
+                        //cout << "matrix loop... @ edgeMatrix[" << minNode << "][" << col << "]" << endl;
                         if (edgeMatrix[minNode][col] < cheapestEdge[1] && !minGraph.isInNodeList(col)) {
                             cheapestEdge[0] = minNode;
                             cheapestEdge[1] = edgeMatrix[minNode][col];
                             cheapestEdge[2] = col;
-                            cout << "Found and added a cheap edge!" << endl;
+                            cout << "Found cheap edge: " << cheapestEdge[0] << " " << cheapestEdge[1] << " " << cheapestEdge[2] << endl;
+                            
                         }
                     }
                 }
                 if (cheapestEdge[1] != INT_MAX) {
+                    //It looks like it's actually finding and attempting to add the correct vertices and edges,
+                    //but somehow is failing to add most of them.
                     minGraph.addVertex(cheapestEdge[2]);
-                    minGraph.addEdge(cheapestEdge[0], cheapestEdge[1], cheapestEdge[2]);
+                    minGraph.addEdge(cheapestEdge[0], cheapestEdge[2], cheapestEdge[1]);
+                    cout << "!--- Added cheap edge: " << cheapestEdge[0] << " " << cheapestEdge[1] << " " << cheapestEdge[2] << endl;
                 }
                 else
                     finished = true;
@@ -205,7 +209,7 @@ class Graph {
         bool isInNodeList(int val) {
             cout << "Entering isInNodList()" << endl;
             for (int i = 0; i < graphSize; i++) {
-                cout << "nodeList[" << i << "] = " << nodeList[i] << endl;
+                //cout << "nodeList[" << i << "] = " << nodeList[i] << endl;
                 if (nodeList[i] == val)
                     return true;
             }
