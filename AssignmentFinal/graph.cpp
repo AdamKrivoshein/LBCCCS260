@@ -8,14 +8,12 @@ using std::endl;
 using std::string;
 
 class Graph {
-    private:
-        //https://stackoverflow.com/questions/16001803/pointer-to-pointer-dynamic-two-dimensional-array
+    public:
         int **edgeMatrix;
         int *nodeList;
         int matrixSize = 4;
         int graphSize = 0;
 
-    public:
         Graph() {
             //Setting up the 2d array edgeMatrix
             edgeMatrix = new int*[matrixSize];
@@ -39,6 +37,19 @@ class Graph {
             else {
                 expandMatrix();
                 nodeList[graphSize] = graphSize;
+                graphSize++;
+            }
+        }
+
+        //Only to be used on minGraphs
+        void addVertex(int node) {
+            if (graphSize < matrixSize) {
+                nodeList[graphSize] = node; //nodeList[node] = graphSize;
+                graphSize++;
+            }
+            else {
+                expandMatrix();
+                nodeList[graphSize] = node;
                 graphSize++;
             }
         }
@@ -128,14 +139,45 @@ class Graph {
             return shortestPaths[destination][0];
         }
 
-        Graph minSpanTree() {
+        Graph minSpanTree(int source) {
             Graph minGraph;
             int cheapestEdge[3];
             bool finished = false;
 
-            //while (!finished) {
-            //    for ()
-            //}
+            cheapestEdge[0] = 0;
+            cheapestEdge[1] = INT_MAX;
+            cheapestEdge[2] = 0;
+
+            minGraph.addVertex(source);
+
+            while (!finished) {
+                cout << "Entering while loop..." << endl;
+                cout << "minGraph.graphSize = " << minGraph.graphSize << endl;
+                for (int i = 0; i < minGraph.graphSize; i++) {
+                    cout << "minGraph loop..." << endl;
+                    int minNode = minGraph.nodeList[i];
+                    for (int col = 0; col < graphSize; col++) {
+                        cout << "matrix loop... @ edgeMatrix[" << minNode << "][" << col << "]" << endl;
+                        if (edgeMatrix[minNode][col] < cheapestEdge[1] && !minGraph.isInNodeList(col)) {
+                            cheapestEdge[0] = minNode;
+                            cheapestEdge[1] = edgeMatrix[minNode][col];
+                            cheapestEdge[2] = col;
+                            cout << "Found and added a cheap edge!" << endl;
+                        }
+                    }
+                }
+                if (cheapestEdge[1] != INT_MAX) {
+                    minGraph.addVertex(cheapestEdge[2]);
+                    minGraph.addEdge(cheapestEdge[0], cheapestEdge[1], cheapestEdge[2]);
+                }
+                else
+                    finished = true;
+                cheapestEdge[0] = 0;
+                cheapestEdge[1] = INT_MAX;
+                cheapestEdge[2] = 0;
+            }
+
+            return minGraph;
         }
 
         void displayMatrix() {
@@ -160,5 +202,13 @@ class Graph {
             free(edgeMatrix);
         }
 
-        //int getNodeList(int index)
+        bool isInNodeList(int val) {
+            cout << "Entering isInNodList()" << endl;
+            for (int i = 0; i < graphSize; i++) {
+                cout << "nodeList[" << i << "] = " << nodeList[i] << endl;
+                if (nodeList[i] == val)
+                    return true;
+            }
+            return false;
+        }
 };

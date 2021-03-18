@@ -27,5 +27,11 @@ int main() {
 
     myGraph.displayMatrix();
 
+    Graph minGraph = myGraph.minSpanTree(0);
+
+    cout << "Minimum Spanning Tree:" << endl;
+
+    minGraph.displayMatrix();
+
     return 0;
 }
