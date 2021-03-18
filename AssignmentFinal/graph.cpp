@@ -14,6 +14,7 @@ class Graph {
         int matrixSize = 4;
         int graphSize = 0;
 
+        //O(n^2)
         Graph() {
             //Setting up the 2d array edgeMatrix
             edgeMatrix = new int*[matrixSize];
@@ -29,6 +30,7 @@ class Graph {
             nodeList = new int[matrixSize];
         }
 
+        //O(1)
         void addVertex() {
             if (graphSize < matrixSize) {
                 nodeList[graphSize] = graphSize;
@@ -41,6 +43,7 @@ class Graph {
             }
         }
 
+        //O(1), unless expansion is needed, which is O(n^2)
         //Only to be used on minGraphs
         void addVertex(int node) {
             if (graphSize < matrixSize) {
@@ -54,11 +57,21 @@ class Graph {
             }
         }
 
+        //O(1), unless expansion is needed, which is O(n^2)
         void addEdge(int source, int destination, int length) {
-            if (source < graphSize && destination < graphSize)
+            if (source < matrixSize && destination < matrixSize) {
                 edgeMatrix[source][destination] = length;
+            }
+            else {
+                while (!(source < matrixSize) || !(destination < matrixSize)) {
+                    expandMatrix();
+                }
+                edgeMatrix[source][destination] = length;
+            }
+
         }
 
+        //O(n^2)
         void expandMatrix() {
             //Initializing new edgeMatrix
             int **newMatrix = new int*[matrixSize * 2];
@@ -97,6 +110,7 @@ class Graph {
             nodeList = newList;
         }
 
+        //O(n)
         int shortestPath(int source, int destination) {
             //Setting up shortestPath 2d array to store each node via index, distance from source, and parent
             int **shortestPaths;
@@ -133,12 +147,10 @@ class Graph {
                     visitedNodes[currentNode] = 1;
                 }
             }
-            //Should consider also printing out the path taken as proof.
-            //IMPORTANT: Also need to free datastructures here
-            //Should also make sure this works when the graph is out of order
             return shortestPaths[destination][0];
         }
 
+        //O(n^2)
         Graph minSpanTree(int source) {
             Graph minGraph;
             int cheapestEdge[3];
@@ -151,28 +163,19 @@ class Graph {
             minGraph.addVertex(source);
 
             while (!finished) {
-                //cout << "Entering while loop..." << endl;
-                cout << "minGraph.graphSize = " << minGraph.graphSize << endl;
                 for (int i = 0; i < minGraph.graphSize; i++) {
-                    //cout << "minGraph loop..." << endl;
                     int minNode = minGraph.nodeList[i];
                     for (int col = 0; col < graphSize; col++) {
-                        //cout << "matrix loop... @ edgeMatrix[" << minNode << "][" << col << "]" << endl;
                         if (edgeMatrix[minNode][col] < cheapestEdge[1] && !minGraph.isInNodeList(col)) {
                             cheapestEdge[0] = minNode;
                             cheapestEdge[1] = edgeMatrix[minNode][col];
-                            cheapestEdge[2] = col;
-                            cout << "Found cheap edge: " << cheapestEdge[0] << " " << cheapestEdge[1] << " " << cheapestEdge[2] << endl;
-                            
+                            cheapestEdge[2] = col;                            
                         }
                     }
                 }
                 if (cheapestEdge[1] != INT_MAX) {
-                    //It looks like it's actually finding and attempting to add the correct vertices and edges,
-                    //but somehow is failing to add most of them.
                     minGraph.addVertex(cheapestEdge[2]);
                     minGraph.addEdge(cheapestEdge[0], cheapestEdge[2], cheapestEdge[1]);
-                    cout << "!--- Added cheap edge: " << cheapestEdge[0] << " " << cheapestEdge[1] << " " << cheapestEdge[2] << endl;
                 }
                 else
                     finished = true;
@@ -184,6 +187,7 @@ class Graph {
             return minGraph;
         }
 
+        //O(n^2)
         void displayMatrix() {
             cout << endl;
             for (int row = 0; row < matrixSize; row++) {
@@ -200,16 +204,16 @@ class Graph {
             cout << endl;
         }
 
+        //O(n)
         void deleteGraph() {
             for (int row = 0; row < matrixSize; row++)
                 free(edgeMatrix[row]);
             free(edgeMatrix);
         }
 
+        //O(n)
         bool isInNodeList(int val) {
-            cout << "Entering isInNodList()" << endl;
             for (int i = 0; i < graphSize; i++) {
-                //cout << "nodeList[" << i << "] = " << nodeList[i] << endl;
                 if (nodeList[i] == val)
                     return true;
             }

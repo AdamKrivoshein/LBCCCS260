@@ -6,7 +6,7 @@
 
 **matrix 2d array** = 16x16 integers
 
-**graphSize** = 2147482647 ("infinity")
+**graphSize** = 2147483647 ("infinity")
 
 **addVertex():**
 
